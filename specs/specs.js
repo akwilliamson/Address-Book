@@ -8,3 +8,12 @@ describe('Contact', function() {
     });
   });
 });
+describe("PhoneNumbers", function() {
+   describe('isValid', function(){
+    it('verifies the phone number validity', function(){
+      var testPhone = Object.create(PhoneNumbers);
+      testPhone.number = 1234567890;
+      testPhone.isValid().should.equal(true);
+    });
+  });
+});

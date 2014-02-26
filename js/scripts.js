@@ -3,12 +3,13 @@ var Contact = {
     return this.firstName + " " + this.lastName;
   }
 };
-var Numbers = {
-  // isValid: function() {
-  //    if (this.number.length === 10 && ) {
-  //     return
-  //   }   
-  // }
+var PhoneNumbers = {
+  isValid: function() {
+     var numberString = this.number.toString();
+     if (numberString.length === 10) {
+      return true;
+    }   
+  }
 };
 
 $(document).ready(function() {
@@ -34,17 +35,16 @@ $(document).ready(function() {
     newContact.address = inputtedAddress;
     newContact.numbers = [];
 
-
     $(".number").each(function() {
       var inputtedNumber = $(this).find("input#new-number").val();
-      var newNumber = Object.create(Numbers);
+      var newNumber = Object.create(PhoneNumbers);
       newNumber.number = inputtedNumber;
 
       newContact.numbers.push(newNumber);
     });
 
- 
 
+    if (newContact.numbers.every(function(number) { number.isValid() })) {
     $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
     
     $(".contact").last().click(function() {
@@ -60,10 +60,45 @@ $(document).ready(function() {
         $('ul#appendedNumbers').append('<li>' + object.number + '</li>');
       });
     });
-
+    } else {
+      alert("Please enter a valid number");
+    }
     this.reset();
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //  $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+    
+    // $(".contact").last().click(function() {
+    //   $("#show-contacts").show();
+
+    //   $('#show-contacts h2').text(newContact.fullName());
+    //   $('.firstname').text(newContact.firstName);
+    //   $('.lastname').text(newContact.lastName);
+    //   $('.address').text(newContact.address);
+      
+    //   $('ul#appendedNumbers').text("");
+    //   newContact.numbers.forEach(function(object) {
+    //     $('ul#appendedNumbers').append('<li>' + object.number + '</li>');
+    //   });
+    // });
 
 
 
